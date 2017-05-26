@@ -1,8 +1,6 @@
 FROM php:5.6-apache
 MAINTAINER Kerry Knopp <kerry@codekoalas.com>
 
-COPY config/php.ini /usr/local/etc/php/
-
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -17,6 +15,7 @@ RUN apt-get update && apt-get install -y \
         libkrb5-dev \
         libldap2-dev \
         cron \
+        vim \
         && apt-get clean
 
 RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
@@ -24,6 +23,7 @@ RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     && docker-php-ext-install -j$(nproc) pdo_mysql \
         curl \
+        mysqli \
         mbstring \
         zip \
         ftp \
@@ -32,6 +32,10 @@ RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
         soap \
         zip \
         imap
+
+# Add Custom PHP and Apache configs
+COPY config/php.ini /usr/local/etc/php/
+COPY config/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
 # Add SuiteCRM code
 # COPY /src /var/www/html
