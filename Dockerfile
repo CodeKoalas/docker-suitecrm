@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
         libldap2-dev \
         cron \
         vim \
+        supervisor \
         && apt-get clean
 
 RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
@@ -44,7 +45,9 @@ RUN (crontab -l 2>/dev/null; echo "*    *    *    *    *     cd /var/www/html; p
 RUN chown www-data:www-data /var/www/html/ -R
 
 # Create volumes. Will change when build process is in place
-VOLUME /var/www/html/
+VOLUME /var/www/html/ /mnt/sites-files
 
 WORKDIR /var/www/html
 EXPOSE 80
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
