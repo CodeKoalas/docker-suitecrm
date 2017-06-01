@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
         cron \
         vim \
         supervisor \
+        git \
         && apt-get clean
 
 RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
