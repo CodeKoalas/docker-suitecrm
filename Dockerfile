@@ -37,9 +37,9 @@ RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
 # Add Custom PHP and Apache configs
 COPY config/php.ini /usr/local/etc/php/
 COPY config/000-default.conf /etc/apache2/sites-enabled/000-default.conf
-
-# Add SuiteCRM code
-# COPY /src /var/www/html
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY bash_aliases /root/.bash_aliases
+COPY start.sh load-configs.sh /root/
 
 RUN (crontab -l 2>/dev/null; echo "*    *    *    *    *     cd /var/www/html; php -f cron.php > /dev/null 2>&1 ") | crontab -
 RUN chown www-data:www-data /var/www/html/ -R
