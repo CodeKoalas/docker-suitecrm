@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
         vim \
         supervisor \
         git \
+	mysql-client \
         && apt-get clean
 
 RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
@@ -48,7 +49,7 @@ RUN chown www-data:www-data /var/www/html/ -R
 # Create volumes. Will change when build process is in place
 VOLUME /var/www/html/ /mnt/sites-files
 
-WORKDIR /var/www/html
+WORKDIR /var/www/site
 EXPOSE 80
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
