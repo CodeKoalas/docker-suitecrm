@@ -45,7 +45,7 @@ COPY confd /etc/confd/
 COPY config/php.ini /usr/local/etc/php/
 COPY config/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY bash_aliases /root/.bash_aliases
+COPY bash_aliases /root/.bashrc
 COPY crons.conf start.sh load-configs.sh mysqlimport.sh mysqlexport.sh mysqldropall.sh /root/
 
 RUN (crontab -l 2>/dev/null; echo "*    *    *    *    *     cd /var/www/html; php -f cron.php > /dev/null 2>&1 ") | crontab -
