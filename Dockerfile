@@ -41,6 +41,7 @@ ADD https://github.com/kelseyhightower/confd/releases/download/v0.13.0/confd-0.1
 RUN chmod +x /usr/local/bin/confd
 
 # Add Custom PHP and Apache configs
+COPY confd /etc/confd/
 COPY config/php.ini /usr/local/etc/php/
 COPY config/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
