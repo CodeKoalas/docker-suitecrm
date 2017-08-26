@@ -1,9 +1,9 @@
 #!/bin/bash
 
-TABLES=$(mysql -h $MYSQL_SERVER $MYSQL_DATABASE -e 'show tables' | awk '{ print $1}' | grep -v '^Tables' )
+TABLES=$(mysql -h $DB_HOST $DB_NAME -e 'show tables' | awk '{ print $1}' | grep -v '^Tables' )
 
 for t in $TABLES
 do
-	echo "Deleting $t table from $MYSQL_DATABASE database..."
-	mysql -h $MYSQL_SERVER $MYSQL_DATABASE -e "drop table $t"
+	echo "Deleting $t table from $DB_NAME database..."
+	mysql -h $DB_HOST $DB_NAME -e "drop table $t"
 done

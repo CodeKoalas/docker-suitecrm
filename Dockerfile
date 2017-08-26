@@ -36,12 +36,16 @@ RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
         zip \
         imap
 
+# Install Confd
+ADD https://github.com/kelseyhightower/confd/releases/download/v0.13.0/confd-0.13.0-linux-amd64 /usr/local/bin/confd
+RUN chmod +x /usr/local/bin/confd
+
 # Add Custom PHP and Apache configs
 COPY config/php.ini /usr/local/etc/php/
 COPY config/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY bash_aliases /root/.bash_aliases
-COPY crons.conf start.sh load-configs.sh /root/
+COPY crons.conf start.sh load-configs.sh mysqlimport.sh mysqlexport.sh mysqldropall.sh /root/
 
 RUN (crontab -l 2>/dev/null; echo "*    *    *    *    *     cd /var/www/html; php -f cron.php > /dev/null 2>&1 ") | crontab -
 RUN chown www-data:www-data /var/www/html/ -R

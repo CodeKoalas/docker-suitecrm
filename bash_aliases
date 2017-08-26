@@ -1,2 +1,2 @@
-alias mysqlc="mysql -h $MYSQL_SERVER $MYSQL_DATABASE"
-alias mysqld="mysqldump -h $MYSQL_SERVER $MYSQL_DATABASE"
+alias mysqlc="mysql -h $DB_HOST $DB_NAME"
+alias mysqld="mysqldump -h $DB_HOST $DB_NAME"
