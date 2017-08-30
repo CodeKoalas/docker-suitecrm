@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
         supervisor \
         git \
 	mysql-client \
+	ssmtp \
         && apt-get clean
 
 RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
