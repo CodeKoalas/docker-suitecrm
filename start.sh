@@ -24,6 +24,13 @@ mkdir -p /mnt/sites-files/upload
 chown www-data:www-data -R $APACHE_DOCROOT
 ln -s /mnt/sites-files/upload $APACHE_DOCROOT/
 
+# Copy in post-merge script to run composer install
+cat /root/post-merge >> /var/www/site/.git/hooks/post-merge
+chmod +x /var/www/site/.git/hooks/post-merge
+
+# Run composer install
+composer install
+
 # Install appropriate apache config and restart apache
 if [[ -n "$WWW" &&  $WWW = "true" ]] ; then
   cp /root/wwwsite.conf /etc/apache2/sites-enabled/000-default.conf
