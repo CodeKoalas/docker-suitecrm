@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
         libcurl4-openssl-dev \
+	libexif-dev \
         libssl-dev \
         libpng12-dev \
         libpq-dev \
@@ -28,6 +29,7 @@ RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     && docker-php-ext-install -j$(nproc) pdo_mysql \
         curl \
+	exif \
         mysqli \
         mbstring \
         zip \
