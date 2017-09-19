@@ -20,7 +20,7 @@ git clone --depth=1 -b $GIT_BRANCH $GIT_REPO /var/www/site/
 
 # Create and symlink files folders
 mkdir -p /mnt/sites-files/upload
-#chown www-data:www-data -R /mnt/sites-files/ modules config_override.php custom cache
+chown www-data:www-data -R /mnt/sites-files/
 chown www-data:www-data -R $APACHE_DOCROOT
 ln -s /mnt/sites-files/upload $APACHE_DOCROOT/
 
