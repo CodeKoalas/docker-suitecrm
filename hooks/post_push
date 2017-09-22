@@ -10,7 +10,7 @@ repoName=${IMAGE_NAME:0:tagStart-1}
 
 # Tag and push image for each additional tag
 #for tag in "php7-xdebug php7-test"; do  
-#    docker tag $IMAGE_NAME ${repoName}:${tag}
-    docker tag $IMAGE_NAME ${repoName}:php7-xdebug
+tag=${php7-xdebug}
+    docker tag $IMAGE_NAME ${repoName}:${tag}
     docker push ${repoName}:${tag}
 #done  
