@@ -39,9 +39,9 @@ fi
 if [[ -n "$LOCAL" &&  $LOCAL = "true" ]] ; then
   echo "[$(date +"%Y-%m-%d %H:%M:%S:%3N %Z")] NOTICE: Setting up XDebug based on state of LOCAL envvar"
   /usr/bin/apt-get update && apt-get install -y \
-    php-xdebug \
+    php5-xdebug \
     --no-install-recommends && rm -r /var/lib/apt/lists/*
-  cp /root/xdebug-php.ini /etc/php/7.0/fpm/php.ini
+  cp /root/xdebug-php.ini /usr/local/etc/php/php.ini
   /usr/bin/supervisorctl restart php-fpm
 fi
 
@@ -53,4 +53,3 @@ fi
 
 crontab /root/crons.conf
 /usr/bin/supervisorctl restart apache2
-
